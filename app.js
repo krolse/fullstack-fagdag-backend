@@ -2,11 +2,13 @@ const express = require('express')
 const app = express()
 const port = 8080
 
-app.get('/restaurant', (req, res) => {
-  const response = getData();
+app.get('/restaurant', async (req, res) => {
+  const response = await getData();
 
   res.send(response);
 })
+
+app.get('/', (req, res) => {})
 
 app.listen(process.env.PORT || port, () => {
 
