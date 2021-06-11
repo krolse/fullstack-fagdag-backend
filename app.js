@@ -7,7 +7,7 @@ const port = 8080
 app.use(cors())
 
 app.get('/restaurant', async (req, res) => {
-  console.log(query);
+  console.log(req.query);
   const response = await getData();
 
   res.send(response);
