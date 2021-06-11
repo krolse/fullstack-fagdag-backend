@@ -2,10 +2,22 @@ const express = require('express')
 const app = express()
 const port = 8080
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/restaurant', (req, res) => {
+  const response = getData();
+
+  res.send(response);
 })
 
 app.listen(process.env.PORT || port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+
 })
+
+const getData = async () => {
+  return await fetch("https://hotell.difi.no/api/json/mattilsynet/smilefjes/tilsyn?")
+  .then(response => response.json())
+  .then(json => filterData(json.entries));
+}
+
+const filterData = (json) => {
+  return json.filter(j => j.total_karakter !== "0" && j.total_karakter !== "1");
+}
