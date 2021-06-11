@@ -1,14 +1,13 @@
 const express = require('express')
 const fetch = require('node-fetch')
-var cors = require('cors')
+const cors = require('cors')
 const app = express()
 const port = 8080
-
 
 app.use(cors())
 
 app.get('/restaurant', async (req, res) => {
-  const response = await getData();
+  const response = await getData(req.query);
 
   res.send(response);
 })
@@ -19,8 +18,8 @@ app.listen(process.env.PORT || port, () => {
 
 })
 
-const getData = async () => {
-  return await fetch("https://hotell.difi.no/api/json/mattilsynet/smilefjes/tilsyn?")
+const getData = async (query) => {
+  return await fetch(`https://hotell.difi.no/api/json/mattilsynet/smilefjes/tilsyn?${query}`)
   .then(response => response.json())
   .then(json => filterData(json.entries));
 }
