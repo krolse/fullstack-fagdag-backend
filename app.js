@@ -8,7 +8,11 @@ app.use(cors())
 
 app.get('/restaurant', async (req, res) => {
   console.log(req.query);
-  const response = await getData();
+
+  let queryString = "";
+  queryString += req.query.poststed ? `poststed=${req.query.poststed}` : "";
+
+  const response = await getData(queryString);
 
   res.send(response);
 })
@@ -19,9 +23,9 @@ app.listen(process.env.PORT || port, () => {
 
 })
 
-const getData = async () => {
+const getData = async (query) => {
 
-  return await fetch(`https://hotell.difi.no/api/json/mattilsynet/smilefjes/tilsyn?`)
+  return await fetch(`https://hotell.difi.no/api/json/mattilsynet/smilefjes/tilsyn?${query}`)
   .then(response => response.json())
   .then(json => filterData(json.entries));
 }
