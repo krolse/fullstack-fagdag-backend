@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/krolse/fullstack-fagdag-backend#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
   },
   "engines": {
     "node": "14.17.0"
