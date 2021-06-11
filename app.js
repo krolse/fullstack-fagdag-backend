@@ -1,7 +1,11 @@
 const express = require('express')
-const fetch = require('node-fetch');
+const fetch = require('node-fetch')
+var cors = require('cors')
 const app = express()
 const port = 8080
+
+
+app.use(cors())
 
 app.get('/restaurant', async (req, res) => {
   const response = await getData();
